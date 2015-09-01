@@ -9,11 +9,12 @@ app.config(function($stateProvider) {
 				add a resolve block that has an author function which 
 				users $stateParams to retrieve the author object
 		*/
+
 	})
 })
 
 // add necessary dependencies here 
-app.controller('CreateCtrl', function($scope) {
+app.controller('CreateCtrl', function($scope, Post, $state) {
 
 	$scope.previewTrue = false;
 
@@ -21,6 +22,13 @@ app.controller('CreateCtrl', function($scope) {
 		$scope.previewTrue = !$scope.previewTrue;
 	}
 
+	$scope.makeNewPost = function(info){
+		console.log(info);
+		Post.create(info).then(function(res){
+			console.log(res);
+			$state.go('main');
+		});
+	}
 	/*
 
 	TODOS: 
